@@ -2,41 +2,10 @@ import string
 import os
 
 from cryptography.fernet import Fernet
-from ctypes import windll
-
-def get_drives() -> list:
-    drives = []
-    bitmask = windll.kernel32.GetLogicalDrives()
-
-    for letter in string.ascii_uppercase:
-        if bitmask & 1:
-            drives.append(letter)
-        bitmask >>= 1
-    
-    return drives
+from util import select_drive
 
 def run():
-    drives = get_drives()
-
-    maxlen = len('vailable drives ')
-
-    print('-' * (maxlen + 4))
-    print('| Available drives |')
-    print('| ' + ('-' * (maxlen)) + ' |')
-
-    for drive in drives:
-        print('| {}'.format(drive) + (' ' * maxlen) + '|')
-
-    print('-' * (maxlen + 4))
-
-    drive = input('\nEnter drive to decrypt: ').upper()
-    print('\n')
-
-    if drive not in drives:
-        print('Invalid drive')
-        exit(1)
-
-    drive = drive.upper() + ':\\'
+    drive = select_drive()
 
     print(f'Decrypting drive {drive}...\n')
 
