@@ -1,9 +1,13 @@
-E=exit
-import drive_decryptor as C,drive_encryptor as D
-def A():
-	print('1. Encrypt a drive\n2. Decrypt a drive\n3. Exit');B=input('\nEnter your choice: ')
-	if B=='1':D.run();A()
-	elif B=='2':C.run();A()
-	else:E(0)
-	E(0)
-if __name__=='__main__':A()
+import drive_decryptor
+import drive_encryptor
+
+if __name__ == '__main__':
+	print('1. Encrypt a drive\n2. Decrypt a drive\n3. Exit')
+	choice = input('\nEnter your choice: ')
+
+	if choice == '1':
+		drive_encryptor.run()
+	elif choice == '2':
+		drive_decryptor.run()
+	else:
+		exit(0)
